@@ -6,7 +6,7 @@
 <title>MRS Engine — Powered by K-Dense | Foundry One Sciences LLC</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
-
+ 
 :root {
   --navy:        #09131f;
   --navy-mid:    #0e1f34;
@@ -28,10 +28,10 @@
   --glow-green:  0 0 24px rgba(0,255,157,0.18);
   --glow-gold:   0 0 24px rgba(240,180,41,0.2);
 }
-
+ 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-
+ 
 body{
   background:var(--navy);
   color:var(--text);
@@ -41,7 +41,7 @@ body{
   overflow-x:hidden;
   line-height:1.6;
 }
-
+ 
 body::before{
   content:'';position:fixed;inset:0;z-index:0;
   background-image:
@@ -54,9 +54,9 @@ body::after{
   background:radial-gradient(ellipse 70% 40% at 50% 0%,rgba(0,200,255,0.07) 0%,transparent 70%);
   pointer-events:none;
 }
-
+ 
 .wrap{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:0 20px;}
-
+ 
 /* ── HEADER ── */
 header{
   padding:22px 0 18px;
@@ -82,7 +82,7 @@ header{
 .badge-blue{background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.25);color:var(--accent);}
 .badge-green{background:rgba(0,255,157,0.1);border:1px solid rgba(0,255,157,0.25);color:var(--accent2);}
 .badge-gold{background:rgba(240,180,41,0.1);border:1px solid rgba(240,180,41,0.25);color:var(--gold);}
-
+ 
 /* ── HERO ── */
 .hero{padding:40px 0 28px;text-align:center;}
 .hero-eye{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:14px;}
@@ -101,7 +101,7 @@ header{
   flex-wrap:wrap;justify-content:center;
 }
 .flow-sep{color:var(--text-muted);}
-
+ 
 /* ── PIPELINE TIMELINE ── */
 .pipeline-bar{
   display:flex;align-items:center;justify-content:center;
@@ -123,7 +123,7 @@ header{
 .ps .ps-label{font-family:'Syne',sans-serif;font-size:10px;font-weight:700;color:var(--text-dim);text-align:center;line-height:1.2;}
 .ps.active .ps-label,.ps.done .ps-label{color:var(--text);}
 .ps-arr{color:var(--text-muted);font-size:14px;padding:0 3px;flex-shrink:0;}
-
+ 
 /* ── CONFIG BAR ── */
 .config-bar{
   display:flex;gap:10px;align-items:center;flex-wrap:wrap;
@@ -142,7 +142,7 @@ header{
 .api-input:focus{border-color:var(--accent);}
 .api-input::placeholder{color:var(--text-muted);}
 .sep-v{width:1px;height:24px;background:rgba(255,255,255,0.07);flex-shrink:0;}
-
+ 
 /* ── QUERY SECTION ── */
 .section-label{
   font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;
@@ -156,7 +156,7 @@ header{
 }
 .pre-btn:hover{background:rgba(0,200,255,0.07);border-color:rgba(0,200,255,0.25);color:var(--accent);}
 .pre-btn.on{background:rgba(0,200,255,0.1);border-color:var(--accent);color:var(--accent);}
-
+ 
 .query-row{display:flex;gap:10px;align-items:stretch;}
 .q-input{
   flex:1;background:var(--glass-b);border:1px solid rgba(0,200,255,0.18);
@@ -166,7 +166,7 @@ header{
 }
 .q-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,200,255,0.08);background:rgba(0,200,255,0.04);}
 .q-input::placeholder{color:var(--text-muted);}
-
+ 
 .run-btn{
   padding:0 26px;background:linear-gradient(135deg,var(--accent),#0055dd);
   border:none;border-radius:10px;color:#fff;font-family:'Syne',sans-serif;
@@ -176,11 +176,11 @@ header{
 }
 .run-btn:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 0 36px rgba(0,200,255,0.35);}
 .run-btn:disabled{opacity:0.45;cursor:not-allowed;transform:none;}
-
+ 
 /* ── RESULTS ── */
 .results-wrap{margin-top:28px;display:none;}
 .results-wrap.show{display:block;}
-
+ 
 /* ── CYCLE STEPS ── */
 .cycle{
   display:flex;align-items:center;justify-content:center;gap:12px;
@@ -196,7 +196,7 @@ header{
 .cs.done{color:var(--accent2);background:rgba(0,255,157,0.06);}
 .cs-dot{width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0;}
 .cs-arr{color:var(--text-muted);font-size:11px;}
-
+ 
 /* ── PANEL ── */
 .panel{
   background:var(--glass);border:1px solid rgba(255,255,255,0.07);
@@ -223,13 +223,13 @@ header{
 .ph-stat.run{color:var(--gold);}
 .ph-stat.ok{color:var(--accent2);}
 .ph-stat.err{color:var(--red);}
-
+ 
 .loading-bar{height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent));background-size:200%;animation:shimmer 1.4s infinite;display:none;}
 .loading-bar.on{display:block;}
 @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
-
+ 
 .pb{padding:16px 18px;}
-
+ 
 /* ── K-DENSE PANEL ── */
 .kd-result{display:flex;align-items:flex-start;gap:18px;flex-wrap:wrap;}
 .kd-badge{
@@ -254,7 +254,7 @@ header{
   background:rgba(0,0,0,0.2);border-left:3px solid rgba(0,200,255,0.25);
   border-radius:0 5px 5px 0;font-size:12px;color:var(--text-dim);line-height:1.6;
 }
-
+ 
 /* ── RETRIEVAL COLS ── */
 .ret-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
 @media(max-width:640px){.ret-cols{grid-template-columns:1fr;}.pipeline-bar{gap:3px;}.ps{min-width:66px;padding:8px 8px;}}
@@ -284,7 +284,7 @@ header{
 .stag-bm{background:rgba(240,180,41,0.08);border:1px solid rgba(240,180,41,0.2);color:var(--gold);}
 .stag-sm{background:rgba(0,200,255,0.08);border:1px solid rgba(0,200,255,0.2);color:var(--accent);}
 .rc-yr{font-size:9px;color:var(--text-muted);font-family:'Space Mono',monospace;}
-
+ 
 /* ── FUSION ── */
 .frow{
   display:flex;align-items:center;gap:12px;padding:10px 14px;
@@ -313,7 +313,7 @@ header{
 .fr-score{text-align:right;flex-shrink:0;}
 .fr-sv{font-family:'Space Mono',monospace;font-size:12px;font-weight:700;color:var(--accent2);}
 .fr-sl{font-size:9px;color:var(--text-muted);font-family:'Space Mono',monospace;}
-
+ 
 /* ── MRS ENGINE STAGES ── */
 .jello-result,.honey-result,.rms-result{
   font-size:13px;color:var(--text-dim);line-height:1.7;
@@ -331,13 +331,13 @@ header{
 }
 .jb-jello{background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.3);color:var(--violet);}
 .jb-discard{background:rgba(255,107,53,0.1);border:1px solid rgba(255,107,53,0.3);color:var(--accent3);}
-
+ 
 .section-divider{
   display:flex;align-items:center;gap:10px;margin:6px 0 14px;
 }
 .sd-line{flex:1;height:1px;background:rgba(255,255,255,0.06);}
 .sd-label{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:1px;white-space:nowrap;}
-
+ 
 /* ── SIEVE READY ── */
 .sieve-ready{
   padding:18px 20px;
@@ -354,7 +354,7 @@ header{
 .sr-stat{text-align:center;}
 .sr-sv{font-family:'Space Mono',monospace;font-size:18px;font-weight:700;color:var(--text);display:block;}
 .sr-sl{font-size:9px;color:var(--text-muted);font-family:'Space Mono',monospace;text-transform:uppercase;letter-spacing:1px;}
-
+ 
 /* ── LOG ── */
 .log{
   padding:12px 16px;background:rgba(0,0,0,0.28);
@@ -367,15 +367,15 @@ header{
 .lt{color:var(--accent);flex-shrink:0;}
 .lv{color:var(--accent2);}
 .lm{color:var(--text-dim);}
-
+ 
 /* ── SPINNER ── */
 .spin{display:inline-block;width:11px;height:11px;border:2px solid rgba(0,200,255,0.2);border-top-color:var(--accent);border-radius:50%;animation:rot 0.75s linear infinite;vertical-align:middle;margin-right:5px;}
 @keyframes rot{to{transform:rotate(360deg)}}
-
+ 
 /* ── ERROR ── */
 .err-box{padding:12px 16px;background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.25);border-radius:8px;color:var(--red);font-size:12px;display:none;margin-top:10px;}
 .err-box.show{display:block;}
-
+ 
 /* ── FOOTER ── */
 footer{margin-top:40px;padding:20px 0;border-top:1px solid rgba(0,200,255,0.07);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
 footer .fl{font-size:10px;color:var(--text-muted);font-family:'Space Mono',monospace;line-height:1.7;}
@@ -384,7 +384,7 @@ footer .fr{font-size:10px;color:var(--text-muted);font-family:'Space Mono',monos
 </head>
 <body>
 <div class="wrap">
-
+ 
 <!-- HEADER -->
 <header>
   <div class="logo">
@@ -400,7 +400,7 @@ footer .fr{font-size:10px;color:var(--text-muted);font-family:'Space Mono',monos
     <span class="badge badge-gold">USPTO Protected</span>
   </div>
 </header>
-
+ 
 <!-- HERO -->
 <div class="hero">
   <div class="hero-eye">Now Powered by K-Dense Hybrid Retrieval</div>
@@ -413,7 +413,7 @@ footer .fr{font-size:10px;color:var(--text-muted);font-family:'Space Mono',monos
     K-Dense <span class="flow-sep">→</span> SIEVE <span class="flow-sep">→</span> HONEYCOMB <span class="flow-sep">→</span> RMS <span class="flow-sep">→</span> Full Cross-Domain Output
   </div>
 </div>
-
+ 
 <!-- PIPELINE BAR -->
 <div class="pipeline-bar" id="pipelineBar">
   <div class="ps ps-kdense" id="ps-kd"><div class="ps-num">PRE</div><div class="ps-icon">🧲</div><div class="ps-label">K-Dense</div></div>
@@ -426,7 +426,7 @@ footer .fr{font-size:10px;color:var(--text-muted);font-family:'Space Mono',monos
   <div class="ps-arr">→</div>
   <div class="ps" id="ps-out"><div class="ps-num">OUT</div><div class="ps-icon">📋</div><div class="ps-label">Output</div></div>
 </div>
-
+ 
 <!-- CONFIG -->
 <div class="config-bar">
   <div class="config-label">API ENDPOINT</div>
@@ -435,7 +435,7 @@ footer .fr{font-size:10px;color:var(--text-muted);font-family:'Space Mono',monos
   <div class="config-label">API KEY</div>
   <input class="api-input" id="apiKey" type="password" placeholder="X-MRS-Key" style="max-width:160px;">
 </div>
-
+ 
 <!-- QUERY -->
 <div class="section-label">Research Query</div>
 <div class="presets" id="presets">
@@ -450,10 +450,10 @@ footer .fr{font-size:10px;color:var(--text-muted);font-family:'Space Mono',monos
   <button class="run-btn" id="runBtn" onclick="runPipeline()">▶ Run Engine</button>
 </div>
 <div class="err-box" id="errBox"></div>
-
+ 
 <!-- RESULTS -->
 <div class="results-wrap" id="resWrap">
-
+ 
   <!-- CYCLE STEPS -->
   <div class="cycle" style="margin-top:24px;" id="cycleBar">
     <div class="cs" id="cs1"><div class="cs-dot"></div>K-DENSE CLASSIFY</div>
@@ -468,7 +468,7 @@ footer .fr{font-size:10px;color:var(--text-muted);font-family:'Space Mono',monos
     <div class="cs-arr">→</div>
     <div class="cs" id="cs6"><div class="cs-dot"></div>RMS OUTPUT</div>
   </div>
-
+ 
   <!-- K-DENSE PANEL -->
   <div class="panel" id="panelKD">
     <div class="ph">
@@ -479,7 +479,7 @@ footer .fr{font-size:10px;color:var(--text-muted);font-family:'Space Mono',monos
     <div class="loading-bar" id="lbKD"></div>
     <div class="pb" id="bodyKD"><div style="color:var(--text-muted);font-size:12px;">Awaiting query...</div></div>
   </div>
-
+ 
   <!-- RETRIEVAL COLS -->
   <div class="ret-cols" id="retCols">
     <div class="panel">
@@ -493,7 +493,7 @@ footer .fr{font-size:10px;color:var(--text-muted);font-family:'Space Mono',monos
       <div class="rlist" id="rDense"><div style="color:var(--text-muted);font-size:12px;padding:6px 0;">Awaiting...</div></div>
     </div>
   </div>
-
+ 
   <!-- FUSION PANEL -->
   <div class="panel" id="panelFusion">
     <div class="ph" style="background:linear-gradient(90deg,rgba(0,200,255,0.06),rgba(0,255,157,0.06));">
@@ -504,10 +504,10 @@ footer .fr{font-size:10px;color:var(--text-muted);font-family:'Space Mono',monos
     <div class="loading-bar" id="lbF"></div>
     <div id="rFusion" style="padding:10px;"><div style="color:var(--text-muted);font-size:12px;">Awaiting retrieval...</div></div>
   </div>
-
+ 
   <!-- MRS STAGES DIVIDER -->
   <div class="section-divider"><div class="sd-line"></div><div class="sd-label">── MRS ENGINE FIRES ──</div><div class="sd-line"></div></div>
-
+ 
   <!-- SIEVE PANEL -->
   <div class="panel" id="panelSieve">
     <div class="ph">
@@ -518,7 +518,7 @@ footer .fr{font-size:10px;color:var(--text-muted);font-family:'Space Mono',monos
     <div class="loading-bar" id="lbSieve"></div>
     <div class="pb" id="bodySieve"><div style="color:var(--text-muted);font-size:12px;">Awaiting K-Dense output...</div></div>
   </div>
-
+ 
   <!-- HONEYCOMB PANEL -->
   <div class="panel" id="panelHC">
     <div class="ph">
@@ -529,7 +529,7 @@ footer .fr{font-size:10px;color:var(--text-muted);font-family:'Space Mono',monos
     <div class="loading-bar" id="lbHC"></div>
     <div class="pb" id="bodyHC"><div style="color:var(--text-muted);font-size:12px;">Awaiting SIEVE...</div></div>
   </div>
-
+ 
   <!-- RMS PANEL -->
   <div class="panel" id="panelRMS">
     <div class="ph">
@@ -540,19 +540,19 @@ footer .fr{font-size:10px;color:var(--text-muted);font-family:'Space Mono',monos
     <div class="loading-bar" id="lbRMS"></div>
     <div class="pb" id="bodyRMS"><div style="color:var(--text-muted);font-size:12px;">Awaiting HONEYCOMB...</div></div>
   </div>
-
+ 
   <!-- FINAL OUTPUT -->
   <div id="finalOut"></div>
   <div class="log" id="runLog"></div>
-
+ 
 </div><!-- /results-wrap -->
-
+ 
 <footer>
   <div class="fl">Foundry One Sciences LLC · Frederick W. Cover II, Sole Inventor<br>USPTO Docket MRSLLC-001 through MRSLLC-005 · Patent Protected</div>
   <div class="fr">MRS Engine + K-Dense Unified Demo<br><span style="color:var(--accent2);">Confidential — Attorney-Client Privileged</span></div>
 </footer>
 </div><!-- /wrap -->
-
+ 
 <script>
 const PRESETS=[
   "GPX4 inhibitor ferroptosis glioblastoma post-surgical mechanism cross-domain",
@@ -561,12 +561,12 @@ const PRESETS=[
   "post-surgical glioblastoma patient survival outcomes ferroptosis induction clinical",
   "iron metabolism GPX4 SLC7A11 ferroptosis Parkinson ALS shared pathway"
 ];
-
+ 
 function setPre(i){
   document.getElementById('qInput').value=PRESETS[i];
   document.querySelectorAll('.pre-btn').forEach((b,j)=>b.classList.toggle('on',j===i));
 }
-
+ 
 // ── QUERY CLASSIFIER ────────────────────────────────────────
 function classify(q){
   const ql=q.toLowerCase();
@@ -582,7 +582,7 @@ function classify(q){
   if(cs>cl)return{type:'chemical',label:'Chemical Structure',icon:'⚗️',css:'kd-chem',sw:75,dw:25,reason:'Chemical entity and structure language detected. High-precision keyword cycle — heavy sparse for exact nomenclature, lighter dense for structural analogues.'};
   return{type:'clinical',label:'Clinical Outcome',icon:'🏥',css:'kd-clin',sw:25,dw:75,reason:'Clinical outcome and patient framing detected. Wide-net semantic cycle — heavy dense retrieval to surface mechanistically related studies across disease contexts.'};
 }
-
+ 
 // ── CLAUDE API ───────────────────────────────────────────────
 async function claude(sys,usr){
   const r=await fetch("https://api.anthropic.com/v1/messages",{
@@ -600,7 +600,7 @@ async function claude(sys,usr){
   const t=d.content.map(b=>b.text||'').join('');
   return JSON.parse(t.replace(/```json|```/g,'').trim());
 }
-
+ 
 // ── MRS ENDPOINT CALL ────────────────────────────────────────
 async function mrsCall(route, body){
   const base=(document.getElementById('apiUrl').value||'').trim();
@@ -615,7 +615,7 @@ async function mrsCall(route, body){
   if(!r.ok)throw new Error('MRS API error '+r.status);
   return r.json();
 }
-
+ 
 // ── DEMO MODE — Claude stands in for Lambda ──────────────────
 async function mrsDemo(route, body){
   // SIEVE
@@ -641,15 +641,15 @@ async function mrsDemo(route, body){
   }
   throw new Error('Unknown route');
 }
-
+ 
 // ── UI HELPERS ───────────────────────────────────────────────
 const $ = id => document.getElementById(id);
 const cs=(id,st)=>{const e=$(id);if(!e)return;e.classList.remove('active','done');if(st==='active')e.classList.add('active');if(st==='done')e.classList.add('done');};
-const ps=(id,cls)=>{document.querySelectorAll('.ps').forEach(s=>s.classList.remove('active','sieve-active','honey-active','done'));const e=$(id);if(e){e.classList.add('active',cls||'');}};
+const ps=(id,cls)=>{document.querySelectorAll('.ps').forEach(s=>s.classList.remove('active','sieve-active','honey-active','done'));const e=$(id);if(e){e.classList.add('active');if(cls)e.classList.add(cls);}};
 const stat=(id,txt,cls)=>{const e=$(id);if(e){e.textContent=txt;e.className='ph-stat '+(cls||'');};};
 const bar=(id,on)=>{const e=$(id);if(e)e.classList.toggle('on',on);};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
-
+ 
 function renderKD(profile){
   $('bodyKD').innerHTML=`
     <div class="kd-result">
@@ -666,7 +666,7 @@ function renderKD(profile){
     $('wfd').style.width=profile.dw+'%';$('wpd').textContent=profile.dw+'%';
   });
 }
-
+ 
 function renderRetrieval(results,cid,type){
   const c=$(cid);c.innerHTML='';
   results.forEach((r,i)=>{
@@ -680,7 +680,7 @@ function renderRetrieval(results,cid,type){
     c.appendChild(card);
   });
 }
-
+ 
 function renderFusion(results){
   const c=$('rFusion');c.innerHTML='';
   results.forEach((r,i)=>{
@@ -693,7 +693,7 @@ function renderFusion(results){
     c.appendChild(row);
   });
 }
-
+ 
 function renderMRSStage(bodyId,data,type){
   const el=$(bodyId);
   if(!data){el.innerHTML=`<div style="color:var(--red);font-size:12px;">Stage returned no result.</div>`;return;}
@@ -750,7 +750,7 @@ function renderMRSStage(bodyId,data,type){
       <pre style="margin-top:10px;">${JSON.stringify(data,null,2)}</pre>`;
   }
 }
-
+ 
 function renderFinalOut(profile, fusionCount, crossCount, sieveResult){
   $('finalOut').innerHTML=`
     <div class="sieve-ready">
@@ -767,7 +767,7 @@ function renderFinalOut(profile, fusionCount, crossCount, sieveResult){
       </div>
     </div>`;
 }
-
+ 
 function renderLog(q,profile){
   const log=$('runLog');log.classList.add('show');
   const ts=new Date().toISOString().replace('T',' ').split('.')[0];
@@ -781,7 +781,7 @@ function renderLog(q,profile){
     <div class="ll"><span class="lt">[RMS]</span><span class="lm">Reasonable Man Standard cross-domain analysis complete</span></div>
     <div class="ll"><span class="lt">[DONE]</span><span class="lm">Full MRS + K-Dense pipeline run logged · Foundry One Sciences LLC · </span><span class="lv">${ts}</span></div>`;
 }
-
+ 
 // ── MAIN PIPELINE ────────────────────────────────────────────
 async function runPipeline(){
   const q=$('qInput').value.trim();
@@ -793,7 +793,7 @@ async function runPipeline(){
   [1,2,3,4,5,6].forEach(n=>cs('cs'+n,''));
   $('finalOut').innerHTML='';$('runLog').classList.remove('show');
   $('rFusion').innerHTML='<div style="color:var(--text-muted);font-size:12px;">Fusing...</div>';
-
+ 
   try {
     // ── K-DENSE CLASSIFY ──────────────────────────────────────
     cs('cs1','active');ps('ps-kd');
@@ -804,9 +804,9 @@ async function runPipeline(){
     bar('lbKD',false);renderKD(profile);
     stat('statKD','✓ DONE','ok');cs('cs1','done');
     $('sWT').textContent=profile.sw+'%';$('dWT').textContent=profile.dw+'%';
-
+ 
     await sleep(300);
-
+ 
     // ── SPARSE RETRIEVE ───────────────────────────────────────
     cs('cs2','active');bar('lbS',true);
     $('rSparse').innerHTML=`<div style="color:var(--text-dim);font-size:12px;padding:6px 0;"><span class="spin"></span>BM25 keyword matching...</div>`;
@@ -815,7 +815,7 @@ async function runPipeline(){
       `Query: "${q}" (${profile.label} profile, sparse weight: ${profile.sw}%). Return 5 results as JSON array only.`
     );
     bar('lbS',false);renderRetrieval(sparseResults,'rSparse','sparse');
-
+ 
     // ── DENSE RETRIEVE ────────────────────────────────────────
     bar('lbD',true);
     $('rDense').innerHTML=`<div style="color:var(--text-dim);font-size:12px;padding:6px 0;"><span class="spin"></span>Semantic embedding retrieval...</div>`;
@@ -825,9 +825,9 @@ async function runPipeline(){
     );
     bar('lbD',false);renderRetrieval(denseResults,'rDense','dense');
     cs('cs2','done');
-
+ 
     await sleep(250);
-
+ 
     // ── RRF FUSION ────────────────────────────────────────────
     cs('cs3','active');stat('statFusion','⟳ FUSING','run');bar('lbF',true);
     const fusionResults=await claude(
@@ -835,12 +835,12 @@ async function runPipeline(){
       `Query: "${q}" | S-weight:${profile.sw}% D-weight:${profile.dw}%\nSparse: ${sparseResults.map((r,i)=>`${i+1}.${r.title}`).join('; ')}\nDense: ${denseResults.map((r,i)=>`${i+1}.${r.title}`).join('; ')}\nApply RRF, deduplicate, return 7 ranked results as JSON array only.`
     );
     bar('lbF',false);renderFusion(fusionResults);stat('statFusion','✓ DONE','ok');cs('cs3','done');
-
+ 
     // Build the abstract digest for MRS stages
     const digestText=`Research query: "${q}"\n\nTop retrieved findings:\n${fusionResults.slice(0,5).map((r,i)=>`${i+1}. ${r.title} (${r.year||''})`).join('\n')}\n\nCross-domain connections detected: ${fusionResults.filter(r=>r.crossDomainFlag).length} of ${fusionResults.length} results flagged as cross-domain.\nRetrieval profile: ${profile.label} | Sparse: ${profile.sw}% | Dense: ${profile.dw}%`;
-
+ 
     await sleep(300);
-
+ 
     // ── SIEVE ─────────────────────────────────────────────────
     cs('cs4','active');ps('ps-sieve','sieve-active');
     stat('statSieve','⟳ RUNNING','run');bar('lbSieve',true);
@@ -848,9 +848,9 @@ async function runPipeline(){
     const sieveResult=await mrsCall('/sieve',{abstract:digestText});
     bar('lbSieve',false);renderMRSStage('bodySieve',sieveResult,'sieve');
     stat('statSieve','✓ DONE','ok');cs('cs4','done');
-
+ 
     await sleep(250);
-
+ 
     // ── HONEYCOMB ─────────────────────────────────────────────
     cs('cs5','active');ps('ps-hc','honey-active');
     stat('statHC','⟳ CLASSIFYING','run');bar('lbHC',true);
@@ -858,9 +858,9 @@ async function runPipeline(){
     const hcResult=await mrsCall('/honeycomb',{sieve_result:sieveResult,source_attribution:'K-Dense Hybrid Retrieval · MRS Engine Run'});
     bar('lbHC',false);renderMRSStage('bodyHC',hcResult,'honeycomb');
     stat('statHC','✓ DONE','ok');cs('cs5','done');
-
+ 
     await sleep(250);
-
+ 
     // ── RMS ───────────────────────────────────────────────────
     cs('cs6','active');ps('ps-rms');
     stat('statRMS','⟳ ANALYZING','run');bar('lbRMS',true);
@@ -868,23 +868,23 @@ async function runPipeline(){
     const rmsResult=await mrsCall('/rms',{query:q+'\n\nK-Dense retrieved context: '+digestText,researcher_role:'academic'});
     bar('lbRMS',false);renderMRSStage('bodyRMS',rmsResult,'rms');
     stat('statRMS','✓ DONE','ok');cs('cs6','done');
-
+ 
     ps('ps-out');
     const crossCount=fusionResults.filter(r=>r.crossDomainFlag).length;
     renderFinalOut(profile,fusionResults.length,crossCount,sieveResult);
     renderLog(q,profile);
     $('finalOut').scrollIntoView({behavior:'smooth',block:'nearest'});
-
+ 
   } catch(e){
     showErr('Pipeline error: '+e.message);console.error(e);
   } finally{
     btn.disabled=false;btn.innerHTML='▶ Run Engine';
   }
 }
-
+ 
 function showErr(m){$('errBox').textContent='⚠ '+m;$('errBox').classList.add('show');}
 function hideErr(){$('errBox').classList.remove('show');}
-
+ 
 $('qInput').addEventListener('keydown',e=>{if(e.key==='Enter'&&(e.ctrlKey||e.metaKey))runPipeline();});
 </script>
 </body>
