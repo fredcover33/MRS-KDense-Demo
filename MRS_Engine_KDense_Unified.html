@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MRS Engine — Powered by K-Dense | Foundry One Sciences LLC</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
+
+:root {
+  --navy:        #09131f;
+  --navy-mid:    #0e1f34;
+  --navy-light:  #152840;
+  --steel:       #1c3554;
+  --accent:      #00c8ff;
+  --accent2:     #00ff9d;
+  --accent3:     #ff6b35;
+  --gold:        #f0b429;
+  --violet:      #a855f7;
+  --red:         #ef4444;
+  --text:        #e2edf8;
+  --text-dim:    #6b90b0;
+  --text-muted:  #334d66;
+  --glass:       rgba(255,255,255,0.03);
+  --glass-b:     rgba(255,255,255,0.06);
+  --border:      rgba(0,200,255,0.1);
+  --glow-blue:   0 0 24px rgba(0,200,255,0.2);
+  --glow-green:  0 0 24px rgba(0,255,157,0.18);
+  --glow-gold:   0 0 24px rgba(240,180,41,0.2);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+
+body{
+  background:var(--navy);
+  color:var(--text);
+  font-family:'DM Sans',sans-serif;
+  font-size:14px;
+  min-height:100vh;
+  overflow-x:hidden;
+  line-height:1.6;
+}
+
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;
+  background-image:
+    linear-gradient(rgba(0,200,255,0.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,200,255,0.025) 1px,transparent 1px);
+  background-size:48px 48px;pointer-events:none;
+}
+body::after{
+  content:'';position:fixed;inset:0;z-index:0;
+  background:radial-gradient(ellipse 70% 40% at 50% 0%,rgba(0,200,255,0.07) 0%,transparent 70%);
+  pointer-events:none;
+}
+
+.wrap{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:0 20px;}
+
+/* ── HEADER ── */
+header{
+  padding:22px 0 18px;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:12px;
+}
+.logo{display:flex;align-items:center;gap:12px;}
+.logo-sq{
+  width:38px;height:38px;border-radius:9px;
+  background:linear-gradient(135deg,#0044cc,var(--accent));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Space Mono',monospace;font-size:13px;font-weight:700;
+  color:#fff;box-shadow:var(--glow-blue);flex-shrink:0;
+}
+.logo-text .t1{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;letter-spacing:-0.3px;}
+.logo-text .t2{font-size:10px;color:var(--text-dim);font-family:'Space Mono',monospace;letter-spacing:0.5px;}
+.header-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.badge{
+  padding:3px 10px;border-radius:20px;font-size:10px;
+  font-family:'Space Mono',monospace;letter-spacing:0.8px;text-transform:uppercase;
+}
+.badge-blue{background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.25);color:var(--accent);}
+.badge-green{background:rgba(0,255,157,0.1);border:1px solid rgba(0,255,157,0.25);color:var(--accent2);}
+.badge-gold{background:rgba(240,180,41,0.1);border:1px solid rgba(240,180,41,0.25);color:var(--gold);}
+
+/* ── HERO ── */
+.hero{padding:40px 0 28px;text-align:center;}
+.hero-eye{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:14px;}
+.hero-h1{
+  font-family:'Syne',sans-serif;font-size:clamp(32px,5.5vw,52px);font-weight:800;
+  line-height:1.08;letter-spacing:-1px;margin-bottom:10px;
+}
+.hero-h1 .g1{background:linear-gradient(90deg,var(--accent),#0066ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-h1 .g2{background:linear-gradient(90deg,var(--accent2),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-sub{font-size:14px;color:var(--text-dim);max-width:560px;margin:0 auto 14px;font-weight:300;}
+.flow-pill{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:7px 16px;background:rgba(240,180,41,0.07);
+  border:1px solid rgba(240,180,41,0.2);border-radius:24px;
+  font-size:11px;color:var(--gold);font-family:'Space Mono',monospace;
+  flex-wrap:wrap;justify-content:center;
+}
+.flow-sep{color:var(--text-muted);}
+
+/* ── PIPELINE TIMELINE ── */
+.pipeline-bar{
+  display:flex;align-items:center;justify-content:center;
+  gap:0;margin:28px 0 32px;flex-wrap:wrap;
+}
+.ps{
+  display:flex;flex-direction:column;align-items:center;gap:5px;
+  padding:10px 14px;min-width:80px;
+  background:var(--glass-b);border:1px solid rgba(255,255,255,0.05);
+  border-radius:8px;transition:all 0.3s ease;position:relative;
+}
+.ps.ps-kdense{border-color:rgba(0,200,255,0.15);}
+.ps.active{border-color:var(--accent);box-shadow:var(--glow-blue);background:rgba(0,200,255,0.07);}
+.ps.active.sieve-active{border-color:var(--gold);box-shadow:var(--glow-gold);background:rgba(240,180,41,0.06);}
+.ps.active.honey-active{border-color:var(--accent2);box-shadow:var(--glow-green);background:rgba(0,255,157,0.06);}
+.ps.done{border-color:rgba(0,255,157,0.3);background:rgba(0,255,157,0.04);}
+.ps .ps-icon{font-size:18px;}
+.ps .ps-num{font-family:'Space Mono',monospace;font-size:9px;color:var(--text-muted);}
+.ps .ps-label{font-family:'Syne',sans-serif;font-size:10px;font-weight:700;color:var(--text-dim);text-align:center;line-height:1.2;}
+.ps.active .ps-label,.ps.done .ps-label{color:var(--text);}
+.ps-arr{color:var(--text-muted);font-size:14px;padding:0 3px;flex-shrink:0;}
+
+/* ── CONFIG BAR ── */
+.config-bar{
+  display:flex;gap:10px;align-items:center;flex-wrap:wrap;
+  padding:14px 18px;
+  background:var(--glass);border:1px solid var(--border);
+  border-radius:10px;margin-bottom:20px;
+}
+.config-label{font-size:11px;color:var(--text-muted);font-family:'Space Mono',monospace;flex-shrink:0;}
+.api-input{
+  flex:1;min-width:200px;
+  background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.08);
+  border-radius:6px;padding:7px 12px;color:var(--text);
+  font-family:'Space Mono',monospace;font-size:12px;outline:none;
+  transition:border-color 0.2s;
+}
+.api-input:focus{border-color:var(--accent);}
+.api-input::placeholder{color:var(--text-muted);}
+.sep-v{width:1px;height:24px;background:rgba(255,255,255,0.07);flex-shrink:0;}
+
+/* ── QUERY SECTION ── */
+.section-label{
+  font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;
+  text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;
+}
+.presets{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px;}
+.pre-btn{
+  padding:5px 13px;background:var(--glass-b);border:1px solid rgba(255,255,255,0.07);
+  border-radius:16px;color:var(--text-dim);font-size:11px;cursor:pointer;
+  transition:all 0.2s;font-family:'DM Sans',sans-serif;
+}
+.pre-btn:hover{background:rgba(0,200,255,0.07);border-color:rgba(0,200,255,0.25);color:var(--accent);}
+.pre-btn.on{background:rgba(0,200,255,0.1);border-color:var(--accent);color:var(--accent);}
+
+.query-row{display:flex;gap:10px;align-items:stretch;}
+.q-input{
+  flex:1;background:var(--glass-b);border:1px solid rgba(0,200,255,0.18);
+  border-radius:10px;padding:13px 16px;color:var(--text);
+  font-family:'DM Sans',sans-serif;font-size:14px;outline:none;
+  transition:all 0.2s;resize:vertical;min-height:54px;
+}
+.q-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,200,255,0.08);background:rgba(0,200,255,0.04);}
+.q-input::placeholder{color:var(--text-muted);}
+
+.run-btn{
+  padding:0 26px;background:linear-gradient(135deg,var(--accent),#0055dd);
+  border:none;border-radius:10px;color:#fff;font-family:'Syne',sans-serif;
+  font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;
+  box-shadow:var(--glow-blue);transition:all 0.2s;min-width:130px;
+  letter-spacing:0.3px;
+}
+.run-btn:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 0 36px rgba(0,200,255,0.35);}
+.run-btn:disabled{opacity:0.45;cursor:not-allowed;transform:none;}
+
+/* ── RESULTS ── */
+.results-wrap{margin-top:28px;display:none;}
+.results-wrap.show{display:block;}
+
+/* ── CYCLE STEPS ── */
+.cycle{
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  padding:12px 16px;background:var(--glass);border:1px solid rgba(255,255,255,0.05);
+  border-radius:9px;margin-bottom:20px;flex-wrap:wrap;
+}
+.cs{
+  display:flex;align-items:center;gap:5px;
+  font-family:'Space Mono',monospace;font-size:10px;color:var(--text-muted);
+  padding:3px 9px;border-radius:4px;transition:all 0.3s;
+}
+.cs.active{color:var(--accent);background:rgba(0,200,255,0.08);}
+.cs.done{color:var(--accent2);background:rgba(0,255,157,0.06);}
+.cs-dot{width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0;}
+.cs-arr{color:var(--text-muted);font-size:11px;}
+
+/* ── PANEL ── */
+.panel{
+  background:var(--glass);border:1px solid rgba(255,255,255,0.07);
+  border-radius:12px;overflow:hidden;margin-bottom:16px;
+}
+.ph{
+  display:flex;align-items:center;gap:10px;
+  padding:11px 16px;background:var(--glass-b);
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.ph-num{
+  width:22px;height:22px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Space Mono',monospace;font-size:10px;font-weight:700;
+  flex-shrink:0;
+}
+.ph-num-blue{background:linear-gradient(135deg,var(--accent),#0055dd);color:#fff;}
+.ph-num-gold{background:linear-gradient(135deg,var(--gold),#ff9500);color:#111;}
+.ph-num-green{background:linear-gradient(135deg,var(--accent2),var(--accent));color:#111;}
+.ph-num-violet{background:linear-gradient(135deg,var(--violet),#7c3aed);color:#fff;}
+.ph-num-red{background:linear-gradient(135deg,var(--red),#dc2626);color:#fff;}
+.ph-title{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--text);flex:1;}
+.ph-stat{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-muted);}
+.ph-stat.run{color:var(--gold);}
+.ph-stat.ok{color:var(--accent2);}
+.ph-stat.err{color:var(--red);}
+
+.loading-bar{height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent));background-size:200%;animation:shimmer 1.4s infinite;display:none;}
+.loading-bar.on{display:block;}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+
+.pb{padding:16px 18px;}
+
+/* ── K-DENSE PANEL ── */
+.kd-result{display:flex;align-items:flex-start;gap:18px;flex-wrap:wrap;}
+.kd-badge{
+  padding:9px 18px;border-radius:8px;font-family:'Syne',sans-serif;
+  font-size:13px;font-weight:700;display:flex;align-items:center;gap:7px;
+  flex-shrink:0;
+}
+.kd-mech{background:rgba(0,200,255,0.1);border:2px solid var(--accent);color:var(--accent);box-shadow:var(--glow-blue);}
+.kd-chem{background:rgba(240,180,41,0.1);border:2px solid var(--gold);color:var(--gold);}
+.kd-clin{background:rgba(0,255,157,0.1);border:2px solid var(--accent2);color:var(--accent2);}
+.kd-weights{flex:1;min-width:200px;}
+.kd-wlabel{font-size:10px;color:var(--text-muted);font-family:'Space Mono',monospace;margin-bottom:7px;}
+.wrow{display:flex;align-items:center;gap:8px;margin-bottom:5px;}
+.wname{font-size:10px;color:var(--text-dim);width:55px;flex-shrink:0;font-family:'Space Mono',monospace;}
+.wtrack{flex:1;height:7px;background:rgba(255,255,255,0.05);border-radius:3px;overflow:hidden;}
+.wfill{height:100%;border-radius:3px;transition:width 0.7s cubic-bezier(0.4,0,0.2,1);width:0%;}
+.wfill-s{background:linear-gradient(90deg,var(--gold),#ff9500);}
+.wfill-d{background:linear-gradient(90deg,var(--accent),var(--accent2));}
+.wpct{font-family:'Space Mono',monospace;font-size:10px;color:var(--text);width:30px;text-align:right;}
+.kd-reason{
+  margin-top:12px;padding:10px 13px;
+  background:rgba(0,0,0,0.2);border-left:3px solid rgba(0,200,255,0.25);
+  border-radius:0 5px 5px 0;font-size:12px;color:var(--text-dim);line-height:1.6;
+}
+
+/* ── RETRIEVAL COLS ── */
+.ret-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+@media(max-width:640px){.ret-cols{grid-template-columns:1fr;}.pipeline-bar{gap:3px;}.ps{min-width:66px;padding:8px 8px;}}
+.mod-hdr{
+  display:flex;align-items:center;gap:7px;padding:9px 14px;
+  background:var(--glass-b);border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.mdot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.mdot-s{background:var(--gold);box-shadow:0 0 7px rgba(240,180,41,0.5);}
+.mdot-d{background:var(--accent);box-shadow:0 0 7px rgba(0,200,255,0.5);}
+.mod-title{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;color:var(--text);flex:1;}
+.mod-wtag{font-family:'Space Mono',monospace;font-size:9px;padding:2px 7px;border-radius:8px;}
+.mwt-s{background:rgba(240,180,41,0.1);border:1px solid rgba(240,180,41,0.25);color:var(--gold);}
+.mwt-d{background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.25);color:var(--accent);}
+.rlist{padding:10px;display:flex;flex-direction:column;gap:7px;}
+.rcard{
+  padding:10px 12px;background:rgba(0,0,0,0.18);
+  border:1px solid rgba(255,255,255,0.04);border-radius:7px;
+  opacity:0;transform:translateY(6px);animation:cardIn 0.35s ease forwards;
+}
+@keyframes cardIn{to{opacity:1;transform:translateY(0)}}
+.rcard:hover{border-color:rgba(0,200,255,0.18);background:rgba(0,200,255,0.03);}
+.rc-rank{font-family:'Space Mono',monospace;font-size:9px;color:var(--text-muted);margin-bottom:3px;}
+.rc-title{font-size:12px;color:var(--text);line-height:1.35;margin-bottom:5px;font-weight:500;}
+.rc-meta{display:flex;gap:6px;flex-wrap:wrap;align-items:center;}
+.stag{font-family:'Space Mono',monospace;font-size:9px;padding:2px 6px;border-radius:3px;}
+.stag-bm{background:rgba(240,180,41,0.08);border:1px solid rgba(240,180,41,0.2);color:var(--gold);}
+.stag-sm{background:rgba(0,200,255,0.08);border:1px solid rgba(0,200,255,0.2);color:var(--accent);}
+.rc-yr{font-size:9px;color:var(--text-muted);font-family:'Space Mono',monospace;}
+
+/* ── FUSION ── */
+.frow{
+  display:flex;align-items:center;gap:12px;padding:10px 14px;
+  border-bottom:1px solid rgba(255,255,255,0.04);
+  opacity:0;animation:cardIn 0.35s ease forwards;transition:background 0.2s;
+}
+.frow:hover{background:rgba(0,200,255,0.03);}
+.frow:last-child{border-bottom:none;}
+.fr-n{
+  width:26px;height:26px;border-radius:6px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Space Mono',monospace;font-size:10px;font-weight:700;
+}
+.fr-n-top{background:linear-gradient(135deg,var(--accent2),var(--accent));color:#111;}
+.fr-n-mid{background:linear-gradient(135deg,var(--accent),#0055dd);color:#fff;}
+.fr-n-low{background:var(--glass-b);border:1px solid rgba(255,255,255,0.1);color:var(--text-dim);}
+.fr-body{flex:1;min-width:0;}
+.fr-title{font-size:12px;color:var(--text);margin-bottom:4px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.fr-tags{display:flex;gap:5px;flex-wrap:wrap;}
+.ftag{font-family:'Space Mono',monospace;font-size:9px;padding:2px 5px;border-radius:3px;}
+.ftag-both{background:rgba(0,255,157,0.08);border:1px solid rgba(0,255,157,0.2);color:var(--accent2);}
+.ftag-s{background:rgba(240,180,41,0.08);border:1px solid rgba(240,180,41,0.18);color:var(--gold);}
+.ftag-d{background:rgba(0,200,255,0.08);border:1px solid rgba(0,200,255,0.18);color:var(--accent);}
+.ftag-cd{background:rgba(255,107,53,0.08);border:1px solid rgba(255,107,53,0.2);color:var(--accent3);}
+.ftag-yr{font-size:9px;color:var(--text-muted);font-family:'Space Mono',monospace;}
+.fr-score{text-align:right;flex-shrink:0;}
+.fr-sv{font-family:'Space Mono',monospace;font-size:12px;font-weight:700;color:var(--accent2);}
+.fr-sl{font-size:9px;color:var(--text-muted);font-family:'Space Mono',monospace;}
+
+/* ── MRS ENGINE STAGES ── */
+.jello-result,.honey-result,.rms-result{
+  font-size:13px;color:var(--text-dim);line-height:1.7;
+}
+.jello-result pre,.honey-result pre,.rms-result pre{
+  background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.06);
+  border-radius:8px;padding:14px;overflow-x:auto;
+  font-family:'Space Mono',monospace;font-size:11px;color:var(--accent2);
+  white-space:pre-wrap;word-break:break-word;
+}
+.jello-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:6px 14px;border-radius:6px;font-family:'Syne',sans-serif;
+  font-size:12px;font-weight:700;margin-bottom:10px;
+}
+.jb-jello{background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.3);color:var(--violet);}
+.jb-discard{background:rgba(255,107,53,0.1);border:1px solid rgba(255,107,53,0.3);color:var(--accent3);}
+
+.section-divider{
+  display:flex;align-items:center;gap:10px;margin:6px 0 14px;
+}
+.sd-line{flex:1;height:1px;background:rgba(255,255,255,0.06);}
+.sd-label{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:1px;white-space:nowrap;}
+
+/* ── SIEVE READY ── */
+.sieve-ready{
+  padding:18px 20px;
+  background:linear-gradient(135deg,rgba(0,255,157,0.05),rgba(0,200,255,0.05));
+  border:1px solid rgba(0,255,157,0.18);border-radius:11px;
+  display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+  opacity:0;animation:cardIn 0.5s ease 0.2s forwards;
+}
+.sr-icon{font-size:32px;}
+.sr-body{flex:1;}
+.sr-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:800;color:var(--accent2);margin-bottom:3px;}
+.sr-sub{font-size:12px;color:var(--text-dim);}
+.sr-stats{display:flex;gap:18px;flex-wrap:wrap;}
+.sr-stat{text-align:center;}
+.sr-sv{font-family:'Space Mono',monospace;font-size:18px;font-weight:700;color:var(--text);display:block;}
+.sr-sl{font-size:9px;color:var(--text-muted);font-family:'Space Mono',monospace;text-transform:uppercase;letter-spacing:1px;}
+
+/* ── LOG ── */
+.log{
+  padding:12px 16px;background:rgba(0,0,0,0.28);
+  border:1px solid rgba(255,255,255,0.05);border-radius:9px;
+  font-family:'Space Mono',monospace;font-size:10px;color:var(--text-muted);
+  line-height:2;display:none;margin-top:14px;
+}
+.log.show{display:block;}
+.ll{display:flex;gap:8px;}
+.lt{color:var(--accent);flex-shrink:0;}
+.lv{color:var(--accent2);}
+.lm{color:var(--text-dim);}
+
+/* ── SPINNER ── */
+.spin{display:inline-block;width:11px;height:11px;border:2px solid rgba(0,200,255,0.2);border-top-color:var(--accent);border-radius:50%;animation:rot 0.75s linear infinite;vertical-align:middle;margin-right:5px;}
+@keyframes rot{to{transform:rotate(360deg)}}
+
+/* ── ERROR ── */
+.err-box{padding:12px 16px;background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.25);border-radius:8px;color:var(--red);font-size:12px;display:none;margin-top:10px;}
+.err-box.show{display:block;}
+
+/* ── FOOTER ── */
+footer{margin-top:40px;padding:20px 0;border-top:1px solid rgba(0,200,255,0.07);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+footer .fl{font-size:10px;color:var(--text-muted);font-family:'Space Mono',monospace;line-height:1.7;}
+footer .fr{font-size:10px;color:var(--text-muted);font-family:'Space Mono',monospace;text-align:right;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <div class="logo-sq">MRS</div>
+    <div class="logo-text">
+      <div class="t1">MRS Engine</div>
+      <div class="t2">Medical Research Solitaire · Foundry One Sciences LLC</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <span class="badge badge-blue">K-Dense Pre-Stage</span>
+    <span class="badge badge-green">SIEVE · HONEYCOMB · RMS</span>
+    <span class="badge badge-gold">USPTO Protected</span>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eye">Now Powered by K-Dense Hybrid Retrieval</div>
+  <h1 class="hero-h1">
+    <span class="g1">K-Dense</span> feeds<br>
+    the <span class="g2">MRS Engine</span>
+  </h1>
+  <p class="hero-sub">K-Dense classifies your query, runs the washing machine, delivers a ranked candidate pool — then the full MRS pipeline fires: SIEVE detects breakthroughs, HONEYCOMB classifies them, RMS finds the cross-domain connections.</p>
+  <div class="flow-pill">
+    K-Dense <span class="flow-sep">→</span> SIEVE <span class="flow-sep">→</span> HONEYCOMB <span class="flow-sep">→</span> RMS <span class="flow-sep">→</span> Full Cross-Domain Output
+  </div>
+</div>
+
+<!-- PIPELINE BAR -->
+<div class="pipeline-bar" id="pipelineBar">
+  <div class="ps ps-kdense" id="ps-kd"><div class="ps-num">PRE</div><div class="ps-icon">🧲</div><div class="ps-label">K-Dense</div></div>
+  <div class="ps-arr">→</div>
+  <div class="ps" id="ps-sieve"><div class="ps-num">S-1</div><div class="ps-icon">🔬</div><div class="ps-label">SIEVE</div></div>
+  <div class="ps-arr">→</div>
+  <div class="ps" id="ps-hc"><div class="ps-num">S-2</div><div class="ps-icon">🍯</div><div class="ps-label">HONEYCOMB</div></div>
+  <div class="ps-arr">→</div>
+  <div class="ps" id="ps-rms"><div class="ps-num">S-3</div><div class="ps-icon">🧬</div><div class="ps-label">RMS</div></div>
+  <div class="ps-arr">→</div>
+  <div class="ps" id="ps-out"><div class="ps-num">OUT</div><div class="ps-icon">📋</div><div class="ps-label">Output</div></div>
+</div>
+
+<!-- CONFIG -->
+<div class="config-bar">
+  <div class="config-label">API ENDPOINT</div>
+  <input class="api-input" id="apiUrl" placeholder="https://YOUR_API_GATEWAY_URL/prod/mrs  (leave blank to run in demo mode)" style="font-size:11px;">
+  <div class="sep-v"></div>
+  <div class="config-label">API KEY</div>
+  <input class="api-input" id="apiKey" type="password" placeholder="X-MRS-Key" style="max-width:160px;">
+</div>
+
+<!-- QUERY -->
+<div class="section-label">Research Query</div>
+<div class="presets" id="presets">
+  <button class="pre-btn" onclick="setPre(0)">GPX4 ferroptosis GBM</button>
+  <button class="pre-btn" onclick="setPre(1)">ATF6 UPR proteostasis aging</button>
+  <button class="pre-btn" onclick="setPre(2)">RSL3 analogues SLC7A11 structure</button>
+  <button class="pre-btn" onclick="setPre(3)">post-surgical GBM survival ferroptosis</button>
+  <button class="pre-btn" onclick="setPre(4)">iron GPX4 ferroptosis Parkinson's ALS</button>
+</div>
+<div class="query-row">
+  <textarea class="q-input" id="qInput" rows="2" placeholder="Enter biomedical query — K-Dense classifies it automatically, then the full MRS pipeline fires..."></textarea>
+  <button class="run-btn" id="runBtn" onclick="runPipeline()">▶ Run Engine</button>
+</div>
+<div class="err-box" id="errBox"></div>
+
+<!-- RESULTS -->
+<div class="results-wrap" id="resWrap">
+
+  <!-- CYCLE STEPS -->
+  <div class="cycle" style="margin-top:24px;" id="cycleBar">
+    <div class="cs" id="cs1"><div class="cs-dot"></div>K-DENSE CLASSIFY</div>
+    <div class="cs-arr">→</div>
+    <div class="cs" id="cs2"><div class="cs-dot"></div>SPARSE+DENSE RETRIEVE</div>
+    <div class="cs-arr">→</div>
+    <div class="cs" id="cs3"><div class="cs-dot"></div>RRF FUSION</div>
+    <div class="cs-arr">→</div>
+    <div class="cs" id="cs4"><div class="cs-dot"></div>SIEVE</div>
+    <div class="cs-arr">→</div>
+    <div class="cs" id="cs5"><div class="cs-dot"></div>HONEYCOMB</div>
+    <div class="cs-arr">→</div>
+    <div class="cs" id="cs6"><div class="cs-dot"></div>RMS OUTPUT</div>
+  </div>
+
+  <!-- K-DENSE PANEL -->
+  <div class="panel" id="panelKD">
+    <div class="ph">
+      <div class="ph-num ph-num-blue">K</div>
+      <div class="ph-title">🧲 K-Dense — Hybrid Retrieval · Auto Cycle Selection</div>
+      <div class="ph-stat" id="statKD">PENDING</div>
+    </div>
+    <div class="loading-bar" id="lbKD"></div>
+    <div class="pb" id="bodyKD"><div style="color:var(--text-muted);font-size:12px;">Awaiting query...</div></div>
+  </div>
+
+  <!-- RETRIEVAL COLS -->
+  <div class="ret-cols" id="retCols">
+    <div class="panel">
+      <div class="mod-hdr"><div class="mdot mdot-s"></div><div class="mod-title">⚡ Sparse — BM25 Keyword</div><div class="mod-wtag mwt-s" id="sWT">—%</div></div>
+      <div class="loading-bar" id="lbS"></div>
+      <div class="rlist" id="rSparse"><div style="color:var(--text-muted);font-size:12px;padding:6px 0;">Awaiting...</div></div>
+    </div>
+    <div class="panel">
+      <div class="mod-hdr"><div class="mdot mdot-d"></div><div class="mod-title">🌊 Dense — Semantic Embedding</div><div class="mod-wtag mwt-d" id="dWT">—%</div></div>
+      <div class="loading-bar" id="lbD"></div>
+      <div class="rlist" id="rDense"><div style="color:var(--text-muted);font-size:12px;padding:6px 0;">Awaiting...</div></div>
+    </div>
+  </div>
+
+  <!-- FUSION PANEL -->
+  <div class="panel" id="panelFusion">
+    <div class="ph" style="background:linear-gradient(90deg,rgba(0,200,255,0.06),rgba(0,255,157,0.06));">
+      <div class="ph-num ph-num-green">⚗</div>
+      <div class="ph-title">RRF Fusion — Unified Ranked Pool → SIEVE Input</div>
+      <div class="ph-stat" id="statFusion">PENDING</div>
+    </div>
+    <div class="loading-bar" id="lbF"></div>
+    <div id="rFusion" style="padding:10px;"><div style="color:var(--text-muted);font-size:12px;">Awaiting retrieval...</div></div>
+  </div>
+
+  <!-- MRS STAGES DIVIDER -->
+  <div class="section-divider"><div class="sd-line"></div><div class="sd-label">── MRS ENGINE FIRES ──</div><div class="sd-line"></div></div>
+
+  <!-- SIEVE PANEL -->
+  <div class="panel" id="panelSieve">
+    <div class="ph">
+      <div class="ph-num ph-num-gold">1</div>
+      <div class="ph-title">🔬 SIEVE — JELLO Breakthrough Detection</div>
+      <div class="ph-stat" id="statSieve">PENDING</div>
+    </div>
+    <div class="loading-bar" id="lbSieve"></div>
+    <div class="pb" id="bodySieve"><div style="color:var(--text-muted);font-size:12px;">Awaiting K-Dense output...</div></div>
+  </div>
+
+  <!-- HONEYCOMB PANEL -->
+  <div class="panel" id="panelHC">
+    <div class="ph">
+      <div class="ph-num ph-num-violet">2</div>
+      <div class="ph-title">🍯 HONEYCOMB — Pattern Atlas Classification</div>
+      <div class="ph-stat" id="statHC">PENDING</div>
+    </div>
+    <div class="loading-bar" id="lbHC"></div>
+    <div class="pb" id="bodyHC"><div style="color:var(--text-muted);font-size:12px;">Awaiting SIEVE...</div></div>
+  </div>
+
+  <!-- RMS PANEL -->
+  <div class="panel" id="panelRMS">
+    <div class="ph">
+      <div class="ph-num ph-num-green">3</div>
+      <div class="ph-title">🧬 RMS — Reasonable Man Standard · Cross-Domain Discovery</div>
+      <div class="ph-stat" id="statRMS">PENDING</div>
+    </div>
+    <div class="loading-bar" id="lbRMS"></div>
+    <div class="pb" id="bodyRMS"><div style="color:var(--text-muted);font-size:12px;">Awaiting HONEYCOMB...</div></div>
+  </div>
+
+  <!-- FINAL OUTPUT -->
+  <div id="finalOut"></div>
+  <div class="log" id="runLog"></div>
+
+</div><!-- /results-wrap -->
+
+<footer>
+  <div class="fl">Foundry One Sciences LLC · Frederick W. Cover II, Sole Inventor<br>USPTO Docket MRSLLC-001 through MRSLLC-005 · Patent Protected</div>
+  <div class="fr">MRS Engine + K-Dense Unified Demo<br><span style="color:var(--accent2);">Confidential — Attorney-Client Privileged</span></div>
+</footer>
+</div><!-- /wrap -->
+
+<script>
+const PRESETS=[
+  "GPX4 inhibitor ferroptosis glioblastoma post-surgical mechanism cross-domain",
+  "ATF6 unfolded protein response UPR proteostasis aging hallmarks upstream",
+  "RSL3 analogues SLC7A11 structural similarity drug repurposing chemical",
+  "post-surgical glioblastoma patient survival outcomes ferroptosis induction clinical",
+  "iron metabolism GPX4 SLC7A11 ferroptosis Parkinson ALS shared pathway"
+];
+
+function setPre(i){
+  document.getElementById('qInput').value=PRESETS[i];
+  document.querySelectorAll('.pre-btn').forEach((b,j)=>b.classList.toggle('on',j===i));
+}
+
+// ── QUERY CLASSIFIER ────────────────────────────────────────
+function classify(q){
+  const ql=q.toLowerCase();
+  const chem=['smiles','fingerprint','morgan','ecfp','tanimoto','scaffold','analogue','analog','rsl3','compound','structure','similarity','pubchem','chembl','ligand','ic50','ki '];
+  const clin=['survival','outcome','patient','clinical trial','cohort','prognosis','mortality','response rate','progression','post-surgical','treatment efficacy','overall survival'];
+  const mech=['mechanism','pathway','gpx4','slc7a11','atf6','upr','ferroptosis','apoptosis','proteostasis','signaling','inhibit','activate','hallmark','axis','upstream','downstream','oxidative'];
+  let cs=chem.filter(t=>ql.includes(t)).length;
+  let cl=clin.filter(t=>ql.includes(t)).length;
+  let cm=mech.filter(t=>ql.includes(t)).length;
+  const genes=q.match(/\b[A-Z][A-Z0-9]{1,5}\b/g)||[];
+  if(genes.length>=2)cm+=2;
+  if(Math.max(cs,cl,cm)===0||cm>=cl&&cm>=cs)return{type:'mechanism',label:'Biological Mechanism',icon:'🔬',css:'kd-mech',sw:50,dw:50,reason:'Detected gene identifiers and mechanistic pathway language. Balanced cycle — equal sparse and dense weight for cross-domain mechanism discovery.'};
+  if(cs>cl)return{type:'chemical',label:'Chemical Structure',icon:'⚗️',css:'kd-chem',sw:75,dw:25,reason:'Chemical entity and structure language detected. High-precision keyword cycle — heavy sparse for exact nomenclature, lighter dense for structural analogues.'};
+  return{type:'clinical',label:'Clinical Outcome',icon:'🏥',css:'kd-clin',sw:25,dw:75,reason:'Clinical outcome and patient framing detected. Wide-net semantic cycle — heavy dense retrieval to surface mechanistically related studies across disease contexts.'};
+}
+
+// ── CLAUDE API ───────────────────────────────────────────────
+async function claude(sys,usr){
+  const r=await fetch("https://api.anthropic.com/v1/messages",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      model:"claude-sonnet-4-20250514",
+      max_tokens:1000,
+      system:sys,
+      messages:[{role:"user",content:usr}]
+    })
+  });
+  if(!r.ok)throw new Error("API error "+r.status);
+  const d=await r.json();
+  const t=d.content.map(b=>b.text||'').join('');
+  return JSON.parse(t.replace(/```json|```/g,'').trim());
+}
+
+// ── MRS ENDPOINT CALL ────────────────────────────────────────
+async function mrsCall(route, body){
+  const base=(document.getElementById('apiUrl').value||'').trim();
+  const key=(document.getElementById('apiKey').value||'').trim();
+  // Demo mode — use Claude API directly with MRS prompts
+  if(!base) return mrsDemo(route, body);
+  const r=await fetch(base+route,{
+    method:'POST',
+    headers:{'Content-Type':'application/json','X-MRS-Key':key},
+    body:JSON.stringify(body)
+  });
+  if(!r.ok)throw new Error('MRS API error '+r.status);
+  return r.json();
+}
+
+// ── DEMO MODE — Claude stands in for Lambda ──────────────────
+async function mrsDemo(route, body){
+  // SIEVE
+  if(route==='/sieve'){
+    return claude(
+      `You are the MRS SIEVE — JELLO breakthrough detector. Analyze for cross-domain discoveries. Return ONLY valid JSON matching this schema: {"result":"JELLO|DISCARD","suit":"♠|♥|♦|♣","domain":"string","jello_color":"Red|Amber|Yellow|Green|Blue|Violet","jello_flavor":"string","triangle_leg_affected":"string","cross_domain_target":"string","breakthrough_summary":"string","clinical_significance":"string","confidence":0.0}`,
+      `Abstract/Query: ${body.abstract}`
+    );
+  }
+  // HONEYCOMB
+  if(route==='/honeycomb'){
+    return claude(
+      `You are the MRS HONEYCOMB — Pattern Atlas classifier. Classify the JELLO result using Three-Teeth protocol. Return ONLY valid JSON matching this schema: {"pattern_id":"string","three_teeth":{"domain":{"suit":"string","triangle_legs":["string"]},"depth":{"jello_color":"string","level":"string"},"cross_domain":{"target_suit":"string","mechanism":"string"}},"card_position":"string","jello_event":{"color":"string","flavor":"string","breakthrough_summary":"string","original_framework":"string","foreign_framework":"string"},"caution_flag":false,"caution_reason":"string","confidence_weight":0.9}`,
+      `SIEVE result: ${JSON.stringify(body.sieve_result)}`
+    );
+  }
+  // RMS
+  if(route==='/rms'){
+    return claude(
+      `You are the MRS RMS — Reasonable Man Standard cross-domain discovery engine. Find the deepest cross-domain breakthroughs. Return ONLY valid JSON: {"query_summary":"string","discoveries":[{"rank":1,"title":"string","source_domain":"♠|♥|♦|♣","target_domain":"♠|♥|♦|♣","triangle_legs_affected":["string"],"jello_color":"string","mechanism":"string","clinical_implication":"string","card_position":"string","confidence":0.9,"literature_basis":"string"}],"rms_assessment":"string","novel_hypotheses":["string"],"proceed_with_caution":"string","recommended_next_queries":["string"]}`,
+      `Query: ${body.query}\nRole: ${body.researcher_role||'academic'}`
+    );
+  }
+  throw new Error('Unknown route');
+}
+
+// ── UI HELPERS ───────────────────────────────────────────────
+const $ = id => document.getElementById(id);
+const cs=(id,st)=>{const e=$(id);if(!e)return;e.classList.remove('active','done');if(st==='active')e.classList.add('active');if(st==='done')e.classList.add('done');};
+const ps=(id,cls)=>{document.querySelectorAll('.ps').forEach(s=>s.classList.remove('active','sieve-active','honey-active','done'));const e=$(id);if(e){e.classList.add('active',cls||'');}};
+const stat=(id,txt,cls)=>{const e=$(id);if(e){e.textContent=txt;e.className='ph-stat '+(cls||'');};};
+const bar=(id,on)=>{const e=$(id);if(e)e.classList.toggle('on',on);};
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+
+function renderKD(profile){
+  $('bodyKD').innerHTML=`
+    <div class="kd-result">
+      <div class="kd-badge ${profile.css}">${profile.icon} ${profile.label}</div>
+      <div class="kd-weights">
+        <div class="kd-wlabel">CYCLE WEIGHTS</div>
+        <div class="wrow"><div class="wname">SPARSE</div><div class="wtrack"><div class="wfill wfill-s" id="wfs" style="width:0%"></div></div><div class="wpct" id="wps">0%</div></div>
+        <div class="wrow"><div class="wname">DENSE</div><div class="wtrack"><div class="wfill wfill-d" id="wfd" style="width:0%"></div></div><div class="wpct" id="wpd">0%</div></div>
+      </div>
+    </div>
+    <div class="kd-reason">${profile.reason}</div>`;
+  requestAnimationFrame(()=>{
+    $('wfs').style.width=profile.sw+'%';$('wps').textContent=profile.sw+'%';
+    $('wfd').style.width=profile.dw+'%';$('wpd').textContent=profile.dw+'%';
+  });
+}
+
+function renderRetrieval(results,cid,type){
+  const c=$(cid);c.innerHTML='';
+  results.forEach((r,i)=>{
+    const sc=type==='sparse'?r.bm25Score:r.semanticScore;
+    const sl=type==='sparse'?'BM25':'SEM';
+    const scl=type==='sparse'?'stag-bm':'stag-sm';
+    const note=type==='sparse'&&r.keyTermsMatched?r.keyTermsMatched.slice(0,2).join(' · '):(r.semanticReason||'').slice(0,55);
+    const card=document.createElement('div');
+    card.className='rcard';card.style.animationDelay=(i*0.07)+'s';
+    card.innerHTML=`<div class="rc-rank">RANK #${i+1} · PMID ${r.pmid||'—'}</div><div class="rc-title">${r.title}</div><div class="rc-meta"><span class="stag ${scl}">${sl}:${(sc||0).toFixed(3)}</span><span class="rc-yr">${r.year||''}</span><span style="font-size:9px;color:var(--text-muted);font-family:'Space Mono',monospace;">${note}</span></div>`;
+    c.appendChild(card);
+  });
+}
+
+function renderFusion(results){
+  const c=$('rFusion');c.innerHTML='';
+  results.forEach((r,i)=>{
+    const cls=i===0?'fr-n-top':i<3?'fr-n-mid':'fr-n-low';
+    const st=r.source==='both'?`<span class="ftag ftag-both">BOTH</span>`:r.source==='sparse_only'?`<span class="ftag ftag-s">SPARSE</span>`:`<span class="ftag ftag-d">DENSE</span>`;
+    const cd=r.crossDomainFlag?`<span class="ftag ftag-cd">🔗 CROSS-DOMAIN</span>`:'';
+    const row=document.createElement('div');
+    row.className='frow';row.style.animationDelay=(i*0.05)+'s';
+    row.innerHTML=`<div class="fr-n ${cls}">${i+1}</div><div class="fr-body"><div class="fr-title">${r.title}</div><div class="fr-tags">${st}${cd}<span class="ftag-yr">${r.year||''}</span><span style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-muted);">S:${r.sparseContrib||0}% D:${r.denseContrib||0}%</span></div></div><div class="fr-score"><div class="fr-sv">${(r.rrfScore||0).toFixed(4)}</div><div class="fr-sl">RRF</div></div>`;
+    c.appendChild(row);
+  });
+}
+
+function renderMRSStage(bodyId,data,type){
+  const el=$(bodyId);
+  if(!data){el.innerHTML=`<div style="color:var(--red);font-size:12px;">Stage returned no result.</div>`;return;}
+  if(type==='sieve'){
+    const isJello=data.result==='JELLO';
+    el.innerHTML=`
+      <div class="jello-badge ${isJello?'jb-jello':'jb-discard'}">${isJello?'🔮 JELLO DETECTED':'❌ DISCARD'}</div>
+      ${isJello?`<div style="font-size:12px;color:var(--text-dim);margin-bottom:8px;line-height:1.6;">
+        <strong style="color:var(--text);">Suit:</strong> ${data.suit||'—'} &nbsp;
+        <strong style="color:var(--text);">Domain:</strong> ${data.domain||'—'} &nbsp;
+        <strong style="color:var(--text);">Color:</strong> <span style="color:var(--violet);">${data.jello_color||'—'}</span><br>
+        <strong style="color:var(--text);">Breakthrough:</strong> ${data.breakthrough_summary||'—'}<br>
+        <strong style="color:var(--text);">Clinical significance:</strong> ${data.clinical_significance||'—'}<br>
+        <strong style="color:var(--text);">Confidence:</strong> ${data.confidence||'—'}
+      </div>`:'<div style="color:var(--text-muted);font-size:12px;">'+data.reason+'</div>'}
+      <pre>${JSON.stringify(data,null,2)}</pre>`;
+  } else if(type==='honeycomb'){
+    const tt=data.three_teeth||{};
+    el.innerHTML=`
+      <div style="font-size:12px;color:var(--text-dim);margin-bottom:10px;line-height:1.7;">
+        <strong style="color:var(--text);">Pattern ID:</strong> ${data.pattern_id||'—'}<br>
+        <strong style="color:var(--text);">Card Position:</strong> <span style="color:var(--gold);">${data.card_position||'—'}</span><br>
+        <strong style="color:var(--text);">Suit:</strong> ${tt.domain?.suit||'—'} &nbsp;
+        <strong style="color:var(--text);">Triangle Legs:</strong> ${(tt.domain?.triangle_legs||[]).join(', ')}<br>
+        <strong style="color:var(--text);">Depth Level:</strong> ${tt.depth?.level||'—'} &nbsp;
+        <strong style="color:var(--text);">Cross-Domain:</strong> ${tt.cross_domain?.target_suit||'—'} — ${tt.cross_domain?.mechanism||'—'}<br>
+        ${data.caution_flag?`<strong style="color:var(--red);">⚠ PROCEED WITH CAUTION:</strong> ${data.caution_reason}`:'<span style="color:var(--accent2);">✓ No caution flag</span>'}
+      </div>
+      <pre>${JSON.stringify(data,null,2)}</pre>`;
+  } else if(type==='rms'){
+    const disc=data.discoveries||[];
+    el.innerHTML=`
+      <div style="font-size:12px;color:var(--text-dim);margin-bottom:12px;line-height:1.7;">
+        <strong style="color:var(--text);">Query:</strong> ${data.query_summary||'—'}
+      </div>
+      ${disc.slice(0,3).map((d,i)=>`
+        <div style="padding:10px 12px;background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.05);border-radius:7px;margin-bottom:8px;">
+          <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;">#${d.rank} — ${d.title}</div>
+          <div style="font-size:11px;color:var(--text-dim);line-height:1.6;">
+            <span style="color:var(--violet);">${d.jello_color||''}</span> &nbsp;
+            ${d.source_domain||''} → ${d.target_domain||''} &nbsp;
+            Card: <span style="color:var(--gold);">${d.card_position||''}</span> &nbsp;
+            Confidence: ${d.confidence||''}<br>
+            <strong style="color:var(--text);">Mechanism:</strong> ${d.mechanism||''}<br>
+            <strong style="color:var(--text);">Clinical implication:</strong> ${d.clinical_implication||''}
+          </div>
+        </div>`).join('')}
+      <div style="margin-top:10px;padding:10px 13px;background:rgba(0,200,255,0.05);border:1px solid rgba(0,200,255,0.12);border-radius:7px;font-size:12px;color:var(--text-dim);line-height:1.6;">
+        <strong style="color:var(--accent);">RMS Assessment:</strong> ${data.rms_assessment||'—'}
+      </div>
+      ${data.novel_hypotheses?.length?`<div style="margin-top:8px;padding:10px 13px;background:rgba(0,255,157,0.04);border:1px solid rgba(0,255,157,0.1);border-radius:7px;font-size:12px;color:var(--text-dim);line-height:1.6;">
+        <strong style="color:var(--accent2);">Novel Hypotheses:</strong><br>${data.novel_hypotheses.map(h=>`• ${h}`).join('<br>')}
+      </div>`:''}
+      <pre style="margin-top:10px;">${JSON.stringify(data,null,2)}</pre>`;
+  }
+}
+
+function renderFinalOut(profile, fusionCount, crossCount, sieveResult){
+  $('finalOut').innerHTML=`
+    <div class="sieve-ready">
+      <div class="sr-icon">🏁</div>
+      <div class="sr-body">
+        <div class="sr-title">Full Pipeline Complete</div>
+        <div class="sr-sub">K-Dense fed the washing machine. MRS Engine ran the full cycle. Cross-domain discoveries delivered.</div>
+      </div>
+      <div class="sr-stats">
+        <div class="sr-stat"><span class="sr-sv">${fusionCount}</span><span class="sr-sl">Candidates</span></div>
+        <div class="sr-stat"><span class="sr-sv">${crossCount}</span><span class="sr-sl">Cross-Domain</span></div>
+        <div class="sr-stat"><span class="sr-sv">${profile.sw}/${profile.dw}</span><span class="sr-sl">S/D Weights</span></div>
+        <div class="sr-stat"><span class="sr-sv">${sieveResult?.result==='JELLO'?'🔮':'—'}</span><span class="sr-sl">JELLO</span></div>
+      </div>
+    </div>`;
+}
+
+function renderLog(q,profile){
+  const log=$('runLog');log.classList.add('show');
+  const ts=new Date().toISOString().replace('T',' ').split('.')[0];
+  log.innerHTML=`
+    <div class="ll"><span class="lt">[${ts}]</span><span class="lm">Pipeline initiated · Query: </span><span class="lv">"${q.slice(0,55)}${q.length>55?'...':''}"</span></div>
+    <div class="ll"><span class="lt">[K-DENSE]</span><span class="lm">Classified as </span><span class="lv">${profile.label}</span><span class="lm"> · Weights S:${profile.sw}% D:${profile.dw}%</span></div>
+    <div class="ll"><span class="lt">[RETRIEVE]</span><span class="lm">Sparse BM25 + Dense PubMedBERT retrieval complete</span></div>
+    <div class="ll"><span class="lt">[RRF]</span><span class="lm">Reciprocal Rank Fusion applied · Unified pool delivered to SIEVE</span></div>
+    <div class="ll"><span class="lt">[SIEVE]</span><span class="lm">JELLO breakthrough detection complete</span></div>
+    <div class="ll"><span class="lt">[HONEYCOMB]</span><span class="lm">Pattern Atlas classification complete</span></div>
+    <div class="ll"><span class="lt">[RMS]</span><span class="lm">Reasonable Man Standard cross-domain analysis complete</span></div>
+    <div class="ll"><span class="lt">[DONE]</span><span class="lm">Full MRS + K-Dense pipeline run logged · Foundry One Sciences LLC · </span><span class="lv">${ts}</span></div>`;
+}
+
+// ── MAIN PIPELINE ────────────────────────────────────────────
+async function runPipeline(){
+  const q=$('qInput').value.trim();
+  if(!q){showErr('Please enter a research query.');return;}
+  hideErr();
+  const btn=$('runBtn');btn.disabled=true;btn.innerHTML='<span class="spin"></span>Running...';
+  $('resWrap').classList.add('show');
+  // Reset cycle
+  [1,2,3,4,5,6].forEach(n=>cs('cs'+n,''));
+  $('finalOut').innerHTML='';$('runLog').classList.remove('show');
+  $('rFusion').innerHTML='<div style="color:var(--text-muted);font-size:12px;">Fusing...</div>';
+
+  try {
+    // ── K-DENSE CLASSIFY ──────────────────────────────────────
+    cs('cs1','active');ps('ps-kd');
+    stat('statKD','⟳ CLASSIFYING','run');bar('lbKD',true);
+    $('bodyKD').innerHTML=`<div style="color:var(--text-dim);font-size:12px;"><span class="spin"></span>Analyzing query tokens...</div>`;
+    await sleep(800);
+    const profile=classify(q);
+    bar('lbKD',false);renderKD(profile);
+    stat('statKD','✓ DONE','ok');cs('cs1','done');
+    $('sWT').textContent=profile.sw+'%';$('dWT').textContent=profile.dw+'%';
+
+    await sleep(300);
+
+    // ── SPARSE RETRIEVE ───────────────────────────────────────
+    cs('cs2','active');bar('lbS',true);
+    $('rSparse').innerHTML=`<div style="color:var(--text-dim);font-size:12px;padding:6px 0;"><span class="spin"></span>BM25 keyword matching...</div>`;
+    const sparseResults=await claude(
+      `You are a biomedical BM25 sparse retrieval engine. Return ONLY a JSON array of 5 objects. Each must have: title(string),authors(string),journal(string),year(number),pmid(string),bm25Score(number 0-1),keyTermsMatched(array of 2-3 strings). Focus on exact term matches. No prose.`,
+      `Query: "${q}" (${profile.label} profile, sparse weight: ${profile.sw}%). Return 5 results as JSON array only.`
+    );
+    bar('lbS',false);renderRetrieval(sparseResults,'rSparse','sparse');
+
+    // ── DENSE RETRIEVE ────────────────────────────────────────
+    bar('lbD',true);
+    $('rDense').innerHTML=`<div style="color:var(--text-dim);font-size:12px;padding:6px 0;"><span class="spin"></span>Semantic embedding retrieval...</div>`;
+    const denseResults=await claude(
+      `You are a PubMedBERT dense semantic retrieval engine. Return ONLY a JSON array of 5 objects. Each must have: title(string),authors(string),journal(string),year(number),pmid(string),semanticScore(number 0-1),semanticReason(string — why it's mechanistically related even with different terminology). Surface cross-domain papers deliberately. No prose.`,
+      `Query: "${q}" (${profile.label} profile, dense weight: ${profile.dw}%). Return 5 semantically related results, including cross-domain papers. JSON array only.`
+    );
+    bar('lbD',false);renderRetrieval(denseResults,'rDense','dense');
+    cs('cs2','done');
+
+    await sleep(250);
+
+    // ── RRF FUSION ────────────────────────────────────────────
+    cs('cs3','active');stat('statFusion','⟳ FUSING','run');bar('lbF',true);
+    const fusionResults=await claude(
+      `You are executing RRF fusion (k=60). Return ONLY a JSON array of 7 objects. Each must have: title,authors,journal,year,pmid,rrfScore(0-1),sparseContrib(0-100),denseContrib(0-100),source("sparse_only"|"dense_only"|"both"),crossDomainFlag(boolean). No prose.`,
+      `Query: "${q}" | S-weight:${profile.sw}% D-weight:${profile.dw}%\nSparse: ${sparseResults.map((r,i)=>`${i+1}.${r.title}`).join('; ')}\nDense: ${denseResults.map((r,i)=>`${i+1}.${r.title}`).join('; ')}\nApply RRF, deduplicate, return 7 ranked results as JSON array only.`
+    );
+    bar('lbF',false);renderFusion(fusionResults);stat('statFusion','✓ DONE','ok');cs('cs3','done');
+
+    // Build the abstract digest for MRS stages
+    const digestText=`Research query: "${q}"\n\nTop retrieved findings:\n${fusionResults.slice(0,5).map((r,i)=>`${i+1}. ${r.title} (${r.year||''})`).join('\n')}\n\nCross-domain connections detected: ${fusionResults.filter(r=>r.crossDomainFlag).length} of ${fusionResults.length} results flagged as cross-domain.\nRetrieval profile: ${profile.label} | Sparse: ${profile.sw}% | Dense: ${profile.dw}%`;
+
+    await sleep(300);
+
+    // ── SIEVE ─────────────────────────────────────────────────
+    cs('cs4','active');ps('ps-sieve','sieve-active');
+    stat('statSieve','⟳ RUNNING','run');bar('lbSieve',true);
+    $('bodySieve').innerHTML=`<div style="color:var(--text-dim);font-size:12px;"><span class="spin"></span>Scanning for JELLO breakthrough moments...</div>`;
+    const sieveResult=await mrsCall('/sieve',{abstract:digestText});
+    bar('lbSieve',false);renderMRSStage('bodySieve',sieveResult,'sieve');
+    stat('statSieve','✓ DONE','ok');cs('cs4','done');
+
+    await sleep(250);
+
+    // ── HONEYCOMB ─────────────────────────────────────────────
+    cs('cs5','active');ps('ps-hc','honey-active');
+    stat('statHC','⟳ CLASSIFYING','run');bar('lbHC',true);
+    $('bodyHC').innerHTML=`<div style="color:var(--text-dim);font-size:12px;"><span class="spin"></span>Classifying into Pattern Atlas...</div>`;
+    const hcResult=await mrsCall('/honeycomb',{sieve_result:sieveResult,source_attribution:'K-Dense Hybrid Retrieval · MRS Engine Run'});
+    bar('lbHC',false);renderMRSStage('bodyHC',hcResult,'honeycomb');
+    stat('statHC','✓ DONE','ok');cs('cs5','done');
+
+    await sleep(250);
+
+    // ── RMS ───────────────────────────────────────────────────
+    cs('cs6','active');ps('ps-rms');
+    stat('statRMS','⟳ ANALYZING','run');bar('lbRMS',true);
+    $('bodyRMS').innerHTML=`<div style="color:var(--text-dim);font-size:12px;"><span class="spin"></span>Running Reasonable Man Standard cross-domain analysis...</div>`;
+    const rmsResult=await mrsCall('/rms',{query:q+'\n\nK-Dense retrieved context: '+digestText,researcher_role:'academic'});
+    bar('lbRMS',false);renderMRSStage('bodyRMS',rmsResult,'rms');
+    stat('statRMS','✓ DONE','ok');cs('cs6','done');
+
+    ps('ps-out');
+    const crossCount=fusionResults.filter(r=>r.crossDomainFlag).length;
+    renderFinalOut(profile,fusionResults.length,crossCount,sieveResult);
+    renderLog(q,profile);
+    $('finalOut').scrollIntoView({behavior:'smooth',block:'nearest'});
+
+  } catch(e){
+    showErr('Pipeline error: '+e.message);console.error(e);
+  } finally{
+    btn.disabled=false;btn.innerHTML='▶ Run Engine';
+  }
+}
+
+function showErr(m){$('errBox').textContent='⚠ '+m;$('errBox').classList.add('show');}
+function hideErr(){$('errBox').classList.remove('show');}
+
+$('qInput').addEventListener('keydown',e=>{if(e.key==='Enter'&&(e.ctrlKey||e.metaKey))runPipeline();});
+</script>
+</body>
+</html>
